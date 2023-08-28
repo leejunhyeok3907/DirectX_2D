@@ -7,7 +7,7 @@ GameEnginePath::GameEnginePath()
 	SetCurrentPath();
 }
 
-GameEnginePath::GameEnginePath(const std::string_view& _path)
+GameEnginePath::GameEnginePath(std::string_view _path)
 	: Path(_path)
 {
 
@@ -15,6 +15,11 @@ GameEnginePath::GameEnginePath(const std::string_view& _path)
 
 GameEnginePath::~GameEnginePath() 
 {
+}
+
+std::string GameEnginePath::GetExtension()
+{
+	return Path.extension().string();
 }
 
 std::string GameEnginePath::GetFileName()
@@ -33,7 +38,7 @@ void GameEnginePath::MoveParent()
 	Path = Path.parent_path();
 }
 
-void GameEnginePath::MoveParentToExistsChild(const std::string_view& _ChildPath)
+void GameEnginePath::MoveParentToExistsChild(std::string_view _ChildPath)
 {
 	while (true)
 	{
@@ -59,7 +64,7 @@ void GameEnginePath::MoveParentToExistsChild(const std::string_view& _ChildPath)
 
 }
 
-void GameEnginePath::MoveChild(const std::string_view& _ChildPath)
+void GameEnginePath::MoveChild(std::string_view _ChildPath)
 {
 	std::filesystem::path CheckPath = Path;
 
@@ -74,7 +79,7 @@ void GameEnginePath::MoveChild(const std::string_view& _ChildPath)
 	// Path.append(_ChildPath);
 }
 
-std::string GameEnginePath::PlusFilePath(const std::string_view& _ChildPath)
+std::string GameEnginePath::PlusFilePath(std::string_view _ChildPath)
 {
 	std::filesystem::path CheckPath = Path;
 

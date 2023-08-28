@@ -11,7 +11,7 @@ GameEngineDirectory::~GameEngineDirectory()
 {
 }
 
-GameEngineDirectory::GameEngineDirectory(const std::string_view& _path) 
+GameEngineDirectory::GameEngineDirectory(std::string_view _path) 
 	: GameEnginePath(_path)
 {
 	if (false == IsDirectory())
@@ -59,6 +59,11 @@ std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(std::vector<std::str
 				Check = true;
 				break;
 			}
+		}
+
+		if (0 == UpperFilter.size())
+		{
+			Check = true;
 		}
 
 		if (false == Check)
