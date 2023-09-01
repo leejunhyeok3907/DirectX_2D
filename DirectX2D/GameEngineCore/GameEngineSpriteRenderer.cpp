@@ -54,7 +54,7 @@ void GameEngineSpriteRenderer::Update(float _Delta)
 		float4 Scale = float4(CurSprite.GetScale());
 		Scale.Z = 1.0f;
 		Scale.W = 0.0f;
-		Transform.SetLocalScale(Scale);
+		Transform.SetLocalScale(Scale * AutoScaleRatio);
 	}
 }
 
@@ -96,7 +96,7 @@ void GameEngineSpriteRenderer::SetSprite(std::string_view _Name, unsigned int in
 	}
 
 	CurSprite = Sprite->GetSpriteData(index);
-	Transform.SetLocalScale(CurSprite.GetScale());
+	Transform.SetLocalScale(CurSprite.GetScale() * AutoScaleRatio);
 }
 
 void GameEngineSpriteRenderer::CreateAnimation(

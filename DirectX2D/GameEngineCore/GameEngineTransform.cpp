@@ -21,6 +21,8 @@ void GameEngineTransform::TransformUpdate()
 		TransData.WorldMatrix = TransData.LocalWorldMatrix * TransData.ParentMatrix;
 	}
 
+	
+
 	CalChilds();
 }
 
