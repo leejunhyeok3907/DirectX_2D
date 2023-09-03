@@ -17,13 +17,16 @@ void Player::Start()
 {
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>();
-		MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC");
+		MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC", 0.05f, -1, -1, true);
 		MainSpriteRenderer->ChangeAnimation("Run");
+		MainSpriteRenderer->SetSamplerState(SamplerOption::LINEAR);
 		MainSpriteRenderer->Transform.SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+
+		MainSpriteRenderer->SetEndEvent("Run", std::bind(&Player::TestEvent, this, std::placeholders::_1));
 
 		// MainSpriteRenderer->Transform.SetLocalScale({5, 5});
 		MainSpriteRenderer->AutoSpriteSizeOn();
-		MainSpriteRenderer->SetAutoScaleRatio(0.4f);
+		MainSpriteRenderer->SetAutoScaleRatio(2.0f);
 	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -31,9 +34,20 @@ void Player::Start()
 
 }
 
+void Player::TestEvent(GameEngineRenderer* _Renderer)
+{
+	int a = 0;
+}
+
 void Player::Update(float _Delta)
 {
 	float Speed = 100.0f;
+
+	if (GameEngineInput::IsDown('A'))
+	{
+		MainSpriteRenderer->AnimationPauseSwitch();
+	}
+
 
 	if (GameEngineInput::IsPress('A'))
 	{
