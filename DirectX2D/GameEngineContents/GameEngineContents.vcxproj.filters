@@ -15,6 +15,9 @@
     <ClCompile Include="PlayMap.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Object\TitleLevel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h" />
@@ -31,6 +34,9 @@
     <ClInclude Include="PlayMap.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Object\TitleLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -38,6 +44,9 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{5149ea30-97f1-47b8-922c-87826f277675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\TitleLevel">
+      <UniqueIdentifier>{3d26dfd0-3838-48f6-8728-86a5342905a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
