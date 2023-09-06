@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineTexture.h>
 #include "PlayMap.h"
+#include "Monster.h"
 
 Player::Player() 
 {
@@ -16,17 +17,19 @@ Player::~Player()
 void Player::Start()
 {
 	{
-		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>();
-		MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC", 0.05f, -1, -1, true);
+		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
+		MainSpriteRenderer->SetSprite("HoHoYee_AttackABC2");
+		/*MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC2", 0.05f, -1, -1, true);
 		MainSpriteRenderer->ChangeAnimation("Run");
 		MainSpriteRenderer->SetSamplerState(SamplerOption::LINEAR);
 		MainSpriteRenderer->Transform.SetLocalPosition({ 100.0f, 0.0f, 0.0f });
 
-		MainSpriteRenderer->SetEndEvent("Run", std::bind(&Player::TestEvent, this, std::placeholders::_1));
+		MainSpriteRenderer->SetEndEvent("Run", std::bind(&Player::TestEvent, this, std::placeholders::_1));*/
 
 		// MainSpriteRenderer->Transform.SetLocalScale({5, 5});
-		MainSpriteRenderer->AutoSpriteSizeOn();
-		MainSpriteRenderer->SetAutoScaleRatio(2.0f);
+		// MainSpriteRenderer->AutoSpriteSizeOn();
+		// MainSpriteRenderer->SetAutoScaleRatio(2.0f);
+		MainSpriteRenderer->Transform.SetLocalScale({-100.0f, 100.0f, 1.0f});
 	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -41,6 +44,33 @@ void Player::TestEvent(GameEngineRenderer* _Renderer)
 
 void Player::Update(float _Delta)
 {
+	//if (xxxx 상황이 되면)
+	//{
+	//	MainSpriteRenderer->Death();
+	//	MainSpriteRenderer = nullptr;
+	//}
+
+	// 충돌했냐 안했냐만 보면
+
+	std::list<std::shared_ptr<Monster>> MonsterList = 
+		GetLevel()->GetObjectGroupConvert<Monster>(ContentsObjectType::Monster);
+
+	for (std::shared_ptr<Monster> MonsterPtr : MonsterList)
+	{
+		// 랜더러로 하는 이유 => 액터로도 할수있는데
+		// 보통 액터는 위치와 기준을 잡아주는 용도로 사용됩니다.
+		// MainSpriteRenderer->Transform.Collision(MonsterPtr->Renderer->Transform);
+
+		GameEngineTransform& Left = MainSpriteRenderer->Transform;
+		GameEngineTransform& Right = MonsterPtr->Renderer->Transform;
+
+		if (GameEngineTransform::Collision({ Left , Right }))
+		{
+			// 충돌했다.
+		}
+	}
+
+
 	float Speed = 100.0f;
 
 	if (GameEngineInput::IsDown('A'))
@@ -79,17 +109,17 @@ void Player::Update(float _Delta)
 		Transform.AddLocalRotation({ 0.0f, 0.0f, -360.0f * _Delta });
 	}
 
-	GameEngineColor Color = PlayMap::MainMap->GetColor(Transform.GetWorldPosition(), GameEngineColor::RED);
+	//GameEngineColor Color = PlayMap::MainMap->GetColor(Transform.GetWorldPosition(), GameEngineColor::RED);
 
-	if (GameEngineColor::RED != Color)
-	{
-		GrivityForce.Y -= _Delta * 100.0f;
-		Transform.AddLocalPosition(GrivityForce * _Delta);
-	}
-	else 
-	{
-		GrivityForce = 0.0f;
-	}
+	//if (GameEngineColor::RED != Color)
+	//{
+	//	GrivityForce.Y -= _Delta * 100.0f;
+	//	Transform.AddLocalPosition(GrivityForce * _Delta);
+	//}
+	//else 
+	//{
+	//	GrivityForce = 0.0f;
+	//}
 	// 땅에 딱붙게하고 싶다면 while돌려서 올려주세요.
 
 

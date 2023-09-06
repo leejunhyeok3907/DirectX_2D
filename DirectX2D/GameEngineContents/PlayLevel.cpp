@@ -2,6 +2,7 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include "PlayMap.h"
+#include "Monster.h"
 
 PlayLevel::PlayLevel() 
 {
@@ -60,18 +61,41 @@ void PlayLevel::Start()
 
 
 	{
-		std::shared_ptr<Player> Object = CreateActor<Player>();
+		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
 	}
 
 	{
-		std::shared_ptr<PlayMap> Object = CreateActor<PlayMap>();
+		GameEngineRandom NewRanadom;
+		for (size_t i = 0; i < 10; i++)
+		{
+			std::shared_ptr<Monster> Object = CreateActor<Monster>(ContentsObjectType::Monster);
+			Object->Transform.SetLocalPosition(NewRanadom.RandomVectorBox2D(0, 1280, 0, -720));
+		}
+
+		std::shared_ptr<PlayMap> Object0 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+		std::shared_ptr<PlayMap> Object1 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+		std::shared_ptr<PlayMap> Object2 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+		std::shared_ptr<PlayMap> Object3 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+	}
+
+	{
+		std::shared_ptr<PlayMap> Object = CreateActor<PlayMap>(ContentsObjectType::BackGround);
+		Map = Object;
 	}
 
 }
 
 void PlayLevel::Update(float _Delta)
 {
-	
+	//static float Time = 0.0f;
+	//Time += _Delta;
+
+	//if (nullptr != Map && 3.0f <= Time)
+	//{
+	//	Map->Death();
+	//	Map = nullptr;
+	//	// Map = nullptr;
+	//}
 }
 
 void PlayLevel::LevelStart(GameEngineLevel* _PrevLevel)

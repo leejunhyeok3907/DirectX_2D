@@ -1,28 +1,27 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 
-// Ό³Έν :
-class TitleLevel : public GameEngineLevel
+class SelectLevel : public GameEngineLevel
 {
 public:
 	// constrcuter destructer
-	TitleLevel();
-	~TitleLevel();
+	SelectLevel();
+	~SelectLevel();
 
 	// delete Function
-	TitleLevel(const TitleLevel& _Other) = delete;
-	TitleLevel(TitleLevel&& _Other) noexcept = delete;
-	TitleLevel& operator=(const TitleLevel& _Other) = delete;
-	TitleLevel& operator=(TitleLevel&& _Other) noexcept = delete;
+	SelectLevel(const SelectLevel& _Other) = delete;
+	SelectLevel(SelectLevel&& _Other) noexcept = delete;
+	SelectLevel& operator=(const SelectLevel& _Other) = delete;
+	SelectLevel& operator=(SelectLevel&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;
+
 	void Update(float _Delta) override;
 
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
-
 };
 

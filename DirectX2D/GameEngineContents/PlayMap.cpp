@@ -3,19 +3,31 @@
 
 PlayMap* PlayMap::MainMap;
 
-PlayMap::PlayMap() 
+PlayMap::PlayMap()
 {
 	MainMap = this;
 }
 
-PlayMap::~PlayMap() 
+PlayMap::~PlayMap()
 {
+}
+
+void PlayMap::Update(float _DeltaTime)
+{
+	//static float Time = 5.0f;
+	//Time -= _DeltaTime;
+
+	//if (nullptr != Renderer && Time <= 0.0f)
+	//{
+	//	Renderer->Death();
+	//	Renderer = nullptr;
+	//}
 }
 
 void PlayMap::Start()
 {
 	{
-		std::shared_ptr<GameEngineSpriteRenderer> Renderer = CreateComponent<GameEngineSpriteRenderer>(-100);
+		Renderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		Renderer->SetSprite("TestMap.png");
 
 		std::shared_ptr<GameEngineTexture> Tex = GameEngineTexture::Find("TestMap.png");
