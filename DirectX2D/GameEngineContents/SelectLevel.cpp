@@ -36,6 +36,18 @@ void SelectLevel::Start()
 		GameEngineSprite::CreateSingle("Select2Y.png");
 		GameEngineSprite::CreateSingle("Select3Y.png");
 		GameEngineSprite::CreateSingle("Select4Y.png");
+		GameEngineSprite::CreateSingle("Marco1.png");
+		GameEngineSprite::CreateSingle("Marco2.png");
+		GameEngineSprite::CreateSingle("Marco3.png");
+		GameEngineSprite::CreateSingle("Eri1.png");
+		GameEngineSprite::CreateSingle("Eri2.png");
+		GameEngineSprite::CreateSingle("Eri3.png");
+		GameEngineSprite::CreateSingle("Tarma1.png");
+		GameEngineSprite::CreateSingle("Tarma2.png");
+		GameEngineSprite::CreateSingle("Tarma3.png");
+		GameEngineSprite::CreateSingle("Pio1.png");
+		GameEngineSprite::CreateSingle("Pio2.png");
+		GameEngineSprite::CreateSingle("Pio3.png");
 	}
 
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -500.0f });

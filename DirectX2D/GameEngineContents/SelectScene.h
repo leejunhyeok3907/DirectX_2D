@@ -1,6 +1,14 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+enum class EFaceType
+{
+	NotSelected,
+	Selected,
+	SelectCheck,
+	Max
+};
+
 class SelectScene : public GameEngineActor
 {
 public:
@@ -21,6 +29,7 @@ protected:
 private:
 	std::shared_ptr<GameEngineSpriteRenderer> BackGroundRender;
 	std::shared_ptr<GameEngineSpriteRenderer> SelectCheck[2][4];
+	std::shared_ptr<GameEngineSpriteRenderer> CharacterFace[4][3];
 
 	float ToggleTimer;
 	float MoveTimer;
