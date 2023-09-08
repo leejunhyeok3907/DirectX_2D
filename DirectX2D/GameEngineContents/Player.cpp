@@ -2,8 +2,10 @@
 #include "Player.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineTexture.h>
+#include <GameEngineCore/GameEngineCollision.h>
 #include "PlayMap.h"
 #include "Monster.h"
+#include "ContentsEnum.h"
 
 Player::Player() 
 {
@@ -17,6 +19,10 @@ Player::~Player()
 void Player::Start()
 {
 	{
+		// 줄줄이 사탕 식으로 만들려고.
+		TestCollision = CreateComponent<GameEngineComponent>(30);
+		TestCollision->Transform.SetLocalScale({ 30, 30, 1 });
+
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
 		MainSpriteRenderer->SetSprite("HoHoYee_AttackABC2");
 		/*MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC2", 0.05f, -1, -1, true);
@@ -32,6 +38,11 @@ void Player::Start()
 		MainSpriteRenderer->Transform.SetLocalScale({-100.0f, 100.0f, 1.0f});
 	}
 
+	{
+		Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::Player);
+		Col->Transform.SetLocalScale({ -100.0f, 100.0f, 1.0f });
+	}
+
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f });
 
@@ -44,6 +55,39 @@ void Player::TestEvent(GameEngineRenderer* _Renderer)
 
 void Player::Update(float _Delta)
 {
+	// 몬스터가 몬스터랑 충돌하고 싶으면?
+	// 내 미래의 위치
+
+	EventParameter Event;
+
+	Event.Enter = [](GameEngineCollision* Col)
+		{
+			int a = 0;
+		};
+
+	Event.Stay = [](GameEngineCollision* Col)
+		{
+			int a = 0;
+		};
+
+
+	Event.Exit = [](GameEngineCollision* Col)
+		{
+			Col->GetActor()->Death();
+
+			int a = 0;
+		};
+
+	Col->CollisionEvent(ContentsCollisionType::Monster, Event);
+
+	//Col->Collision(ContentsCollisionType::Monster, {100.0f, 0.0f, 0.0f}, [](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
+	//	{
+	//		for (size_t i = 0; i < _Collision.size(); i++)
+	//		{
+	//			_Collision[i]->GetActor()->Death();
+	//		}
+	//	});
+
 	//if (xxxx 상황이 되면)
 	//{
 	//	MainSpriteRenderer->Death();
@@ -52,23 +96,27 @@ void Player::Update(float _Delta)
 
 	// 충돌했냐 안했냐만 보면
 
-	std::list<std::shared_ptr<Monster>> MonsterList = 
-		GetLevel()->GetObjectGroupConvert<Monster>(ContentsObjectType::Monster);
+	//std::list<std::shared_ptr<Monster>> MonsterList = 
+	//	GetLevel()->GetObjectGroupConvert<Monster>(ContentsObjectType::Monster);
 
-	for (std::shared_ptr<Monster> MonsterPtr : MonsterList)
-	{
-		// 랜더러로 하는 이유 => 액터로도 할수있는데
-		// 보통 액터는 위치와 기준을 잡아주는 용도로 사용됩니다.
-		// MainSpriteRenderer->Transform.Collision(MonsterPtr->Renderer->Transform);
+	//for (std::shared_ptr<Monster> MonsterPtr : MonsterList)
+	//{
+	//	// 랜더러로 하는 이유 => 액터로도 할수있는데
+	//	// 보통 액터는 위치와 기준을 잡아주는 용도로 사용됩니다.
+	//	// MainSpriteRenderer->Transform.Collision(MonsterPtr->Renderer->Transform);
 
-		GameEngineTransform& Left = MainSpriteRenderer->Transform;
-		GameEngineTransform& Right = MonsterPtr->Renderer->Transform;
+	//	GameEngineTransform& Left = TestCollision->Transform;
+	//	GameEngineTransform& Right = MonsterPtr->Renderer->Transform;
+	//	Right.AddLocalRotation({ 0.0f, 0.0f, 360.0f * _Delta });
 
-		if (GameEngineTransform::Collision({ Left , Right }))
-		{
-			// 충돌했다.
-		}
-	}
+	//	// 콜리전 파라미터를 사용한 이유가. 
+	//	if (GameEngineTransform::Collision({ Left , Right, ColType::OBBBOX2D }))
+	//	{
+	//		MonsterPtr->Death();
+	//		int a = 0;
+	//		// 충돌했다.
+	//	}
+	//}
 
 
 	float Speed = 100.0f;

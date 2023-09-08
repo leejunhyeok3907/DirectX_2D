@@ -16,6 +16,7 @@ public:
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
 	std::shared_ptr<GameEngineSpriteRenderer> Renderer;
+
 protected:
 	void Start() override;
 

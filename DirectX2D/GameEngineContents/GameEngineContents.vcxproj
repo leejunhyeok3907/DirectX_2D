@@ -189,6 +189,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SelectLevel.cpp" />
+    <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>
@@ -218,6 +220,8 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="SelectLevel.h" />
+    <ClInclude Include="SelectScene.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>

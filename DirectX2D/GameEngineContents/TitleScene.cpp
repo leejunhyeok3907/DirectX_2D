@@ -27,8 +27,17 @@ void TitleScene::Update(float _Delta)
 {
 	ToggleTimer += _Delta;
 
-	if (ToggleTimer > 3.f)
+	if (ToggleTimer > 1.f)
 	{
-		ToggleTimer -= 3.f;
+		ToggleTimer -= 1.f;
+
+		if (InsertCoin->IsUpdate())
+		{
+			InsertCoin->Off();
+		}
+		else
+		{
+			InsertCoin->On();
+		}
 	}
 }
