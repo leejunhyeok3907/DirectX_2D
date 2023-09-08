@@ -25,6 +25,9 @@ void Player::Start()
 
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
 		MainSpriteRenderer->SetSprite("HoHoYee_AttackABC2");
+		MainSpriteRenderer->SetImageScale({ 100.0f, 100.0f });
+		// MainSpriteRenderer->Transform.SetLocalScale({30, 30, 1.0f});
+
 		/*MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC2", 0.05f, -1, -1, true);
 		MainSpriteRenderer->ChangeAnimation("Run");
 		MainSpriteRenderer->SetSamplerState(SamplerOption::LINEAR);
@@ -35,7 +38,15 @@ void Player::Start()
 		// MainSpriteRenderer->Transform.SetLocalScale({5, 5});
 		// MainSpriteRenderer->AutoSpriteSizeOn();
 		// MainSpriteRenderer->SetAutoScaleRatio(2.0f);
-		MainSpriteRenderer->Transform.SetLocalScale({-100.0f, 100.0f, 1.0f});
+		// MainSpriteRenderer->Transform.SetLocalScale({-100.0f, 100.0f, 1.0f});
+	}
+
+	{
+		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
+		MainSpriteRenderer->SetSprite("HoHoYee_AttackABC2");
+		MainSpriteRenderer->Transform.SetLocalPosition({ 0, 70, 1.0f });
+		MainSpriteRenderer->SetImageScale({ 100.0f, 20.0f });
+		MainSpriteRenderer->SetPivotType(PivotType::Left);
 	}
 
 	{
@@ -55,6 +66,8 @@ void Player::TestEvent(GameEngineRenderer* _Renderer)
 
 void Player::Update(float _Delta)
 {
+	MainSpriteRenderer->AddImageScale(float4{-10.0f, 0.0f, 0.0f} *_Delta);
+
 	// 몬스터가 몬스터랑 충돌하고 싶으면?
 	// 내 미래의 위치
 
@@ -62,6 +75,7 @@ void Player::Update(float _Delta)
 
 	Event.Enter = [](GameEngineCollision* Col)
 		{
+			Col->GetActor()->Death();
 			int a = 0;
 		};
 
@@ -73,7 +87,7 @@ void Player::Update(float _Delta)
 
 	Event.Exit = [](GameEngineCollision* Col)
 		{
-			Col->GetActor()->Death();
+			// 
 
 			int a = 0;
 		};

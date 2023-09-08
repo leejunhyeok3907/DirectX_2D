@@ -12,6 +12,8 @@ TitleScene::~TitleScene()
 
 void TitleScene::Start()
 {
+	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
+
 	TitleRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 	TitleRenderer->SetSprite("MainTitle.png");
 

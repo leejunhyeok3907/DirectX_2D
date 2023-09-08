@@ -27,6 +27,6 @@ void Monster::Start()
 
 	{
 		std::shared_ptr<GameEngineCollision> Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::Monster);
-		Col->Transform.SetLocalScale(Scale);
+		// Col->Transform.SetLocalScale(Scale);
 	}
 }

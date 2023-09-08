@@ -26,8 +26,18 @@ void SelectLevel::Start()
 			GameEngineTexture::Load(File.GetStringPath());
 		}
 
+		std::vector<GameEngineDirectory> Directorys = Dir.GetAllDirectory();
+
+		for (size_t i = 0; i < Directorys.size(); i++)
+		{
+			GameEngineDirectory& Dir = Directorys[i];
+
+			GameEngineSprite::CreateFolder(Dir.GetStringPath());
+		}
+
 		GameEngineSprite::CreateSingle("SelectBackground.png");
-		GameEngineSprite::CreateSingle("DoorClose.png");
+		GameEngineSprite::CreateSingle("DoorClosed1.png");
+		GameEngineSprite::CreateSingle("DoorClosed2.png");
 		GameEngineSprite::CreateSingle("Select1R.png");
 		GameEngineSprite::CreateSingle("Select2R.png");
 		GameEngineSprite::CreateSingle("Select3R.png");

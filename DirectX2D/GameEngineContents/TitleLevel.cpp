@@ -48,7 +48,7 @@ void TitleLevel::Update(float _Delta)
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	int a = 0;
+	GameEngineSound::SoundPlay("TitleBgm.mp3");
 }
 
 void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)

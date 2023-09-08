@@ -1,8 +1,11 @@
 #include "PreCompile.h"
 #include "ContentsCore.h"
+
+#include <GameEngineCore/GameEngineSpriteRenderer.h>
+
 #include "PlayLevel.h"
-#include "TitleLevel.h"
 #include "SelectLevel.h"
+#include "TitleLevel.h"
 
 ContentsCore::ContentsCore() 
 {
@@ -14,6 +17,11 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
+	//기본적으로 SpriteRenderer를 만들때 넣어줄 샘플러를 지정합니다.
+	GameEngineSpriteRenderer::SetDefaultSampler("POINT");
+
+	SoundContentLoad();
+
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
 	GameEngineCore::CreateLevel<SelectLevel>("SelectLevel");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
@@ -31,4 +39,21 @@ void ContentsCore::Update(float _Delta)
 void ContentsCore::Release()
 {
 
+}
+
+void ContentsCore::SoundContentLoad()
+{
+	GameEngineDirectory Dir;
+	Dir.MoveParentToExistsChild("GameEngineResources");
+	Dir.MoveChild("ContentsResources");
+	Dir.MoveChild("Sound");
+	Dir.MoveChild("Bgm");
+
+	std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+	for (size_t i = 0; i < Files.size(); i++)
+	{
+		GameEngineFile& File = Files[i];
+		GameEngineSound::SoundLoad(File.GetStringPath());
+	}
 }

@@ -46,8 +46,6 @@ void PlayLevel::Start()
 			GameEngineDirectory& Dir = Directorys[i];
 
 			GameEngineSprite::CreateFolder(Dir.GetStringPath());
-
-			// GameEngineTexture::Load(File.GetStringPath());
 		}
 
 		GameEngineSprite::CreateCut("TestPlayer.png", 6, 6);
@@ -65,17 +63,17 @@ void PlayLevel::Start()
 	}
 
 	{
-		GameEngineRandom NewRanadom;
-		for (size_t i = 0; i < 10; i++)
-		{
-			std::shared_ptr<Monster> Object = CreateActor<Monster>(ContentsObjectType::Monster);
-			Object->Transform.SetLocalPosition(NewRanadom.RandomVectorBox2D(0, 1280, 0, -720));
-		}
+		//GameEngineRandom NewRanadom;
+		//for (size_t i = 0; i < 10; i++)
+		//{
+		//	std::shared_ptr<Monster> Object = CreateActor<Monster>(ContentsObjectType::Monster);
+		//	Object->Transform.SetLocalPosition(NewRanadom.RandomVectorBox2D(0, 1280, 0, -720));
+		//}
 
-		std::shared_ptr<PlayMap> Object0 = CreateActor<PlayMap>(ContentsObjectType::Monster);
-		std::shared_ptr<PlayMap> Object1 = CreateActor<PlayMap>(ContentsObjectType::Monster);
-		std::shared_ptr<PlayMap> Object2 = CreateActor<PlayMap>(ContentsObjectType::Monster);
-		std::shared_ptr<PlayMap> Object3 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+		//std::shared_ptr<PlayMap> Object0 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+		//std::shared_ptr<PlayMap> Object1 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+		//std::shared_ptr<PlayMap> Object2 = CreateActor<PlayMap>(ContentsObjectType::Monster);
+		//std::shared_ptr<PlayMap> Object3 = CreateActor<PlayMap>(ContentsObjectType::Monster);
 	}
 
 	{
