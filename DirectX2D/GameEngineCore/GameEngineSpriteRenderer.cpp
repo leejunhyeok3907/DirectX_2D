@@ -70,7 +70,7 @@ SpriteData GameEngineFrameAnimation::Update(float _DeltaTime)
 
 GameEngineSpriteRenderer::GameEngineSpriteRenderer() 
 {
-	Sampler = GameEngineSampler::Find("LINEAR");
+	Sampler = GameEngineSampler::Find("POINT");
 }
 
 GameEngineSpriteRenderer::~GameEngineSpriteRenderer() 
