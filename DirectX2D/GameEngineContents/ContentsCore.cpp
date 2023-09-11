@@ -38,7 +38,7 @@ void ContentsCore::Update(float _Delta)
 
 void ContentsCore::Release()
 {
-
+	GameEngineSound::Release();
 }
 
 void ContentsCore::SoundContentLoad()

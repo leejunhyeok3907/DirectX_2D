@@ -3,6 +3,8 @@
 #include "SelectScene.h"
 
 SelectLevel::SelectLevel()
+	: timer(0)
+	, IsOpen{false, }
 {
 }
 
@@ -58,23 +60,76 @@ void SelectLevel::Start()
 		GameEngineSprite::CreateSingle("Pio1.png");
 		GameEngineSprite::CreateSingle("Pio2.png");
 		GameEngineSprite::CreateSingle("Pio3.png");
+		GameEngineSprite::CreateSingle("Black.png");
 	}
 
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
 
-	std::shared_ptr<SelectScene> Title = CreateActor<SelectScene>(ContentsObjectType::BackGround);
+	SelectSceneObject = CreateActor<SelectScene>(ContentsObjectType::BackGround);
 }
 
 void SelectLevel::Update(float _Delta)
 {
+	timer += _Delta;
 
+	if (false == IsEveryDoorOpen()) DoorOpen();
 }
 
 void SelectLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	GameEngineSound::SoundPlay("SelectBgm.mp3");
 }
 
 void SelectLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
+}
+
+void SelectLevel::DoorOpen()
+{
+	float Door1OpenTiming = 1.5f;
+	float Door2OpenTiming = 1.0f;
+	float Door3OpenTiming = 1.3f;
+	float Door4OpenTiming = 1.1f;
+
+	if (false == IsOpen[0])
+	{
+		if (timer > Door1OpenTiming)
+		{
+			IsOpen[0] = true;
+			SelectSceneObject->StartOpenDoor(0);
+		}
+	}
+
+	if (false == IsOpen[1])
+	{
+		if (timer > Door2OpenTiming)
+		{
+			IsOpen[1] = true;
+			SelectSceneObject->StartOpenDoor(1);
+		}
+	}
+
+	if (false == IsOpen[2])
+	{
+		if (timer > Door3OpenTiming)
+		{
+			IsOpen[2] = true;
+			SelectSceneObject->StartOpenDoor(2);
+		}
+	}
+
+	if (false == IsOpen[3])
+	{
+		if (timer > Door4OpenTiming)
+		{
+			IsOpen[3] = true;
+			SelectSceneObject->StartOpenDoor(3);
+		}
+	}
+}
+
+bool SelectLevel::IsEveryDoorOpen()
+{
+	return IsOpen[0] && IsOpen[1] && IsOpen[2] && IsOpen[3];
 }

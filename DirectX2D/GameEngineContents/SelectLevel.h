@@ -23,5 +23,13 @@ protected:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
+	std::shared_ptr<class SelectScene> SelectSceneObject;
+
+	float timer;
+	bool IsOpen[4];
+
+private:
+	void DoorOpen();
+	bool IsEveryDoorOpen();
 };
 

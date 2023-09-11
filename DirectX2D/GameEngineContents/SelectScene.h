@@ -31,11 +31,18 @@ private:
 	std::shared_ptr<GameEngineSpriteRenderer> SelectCheck[2][4];
 	std::shared_ptr<GameEngineSpriteRenderer> CharacterFace[4][3];
 	std::shared_ptr<GameEngineSpriteRenderer> DoorCloseEffect;
+	std::shared_ptr<GameEngineSpriteRenderer> Door[4];
 
 
 	float ToggleTimer;
 	float MoveTimer;
 	int ColorTurn;
 	int SelectNum;
+	bool MoveDoor[4];
+	float DoorSpeed[4];
+
+public:
+	void StartOpenDoor(int _DoorNum);
+	void StartCloseDoor(int _DoorNum);
 };
 
