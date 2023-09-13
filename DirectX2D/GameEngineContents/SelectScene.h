@@ -9,6 +9,13 @@ enum class EFaceType
 	Max
 };
 
+enum class EMoveType
+{
+	Open,
+	Close,
+	Max
+};
+
 class SelectScene : public GameEngineActor
 {
 public:
@@ -33,16 +40,29 @@ private:
 	std::shared_ptr<GameEngineSpriteRenderer> DoorCloseEffect;
 	std::shared_ptr<GameEngineSpriteRenderer> Door[4];
 
+	std::pair<float, float> CharcterFace_Location[4];
+
 
 	float ToggleTimer;
 	float MoveTimer;
 	int ColorTurn;
 	int SelectNum;
-	bool MoveDoor[4];
+	bool MoveDoor[4][2];
 	float DoorSpeed[4];
+
+	bool SelectOnce;
+	bool SelectRestrict;
 
 public:
 	void StartOpenDoor(int _DoorNum);
 	void StartCloseDoor(int _DoorNum);
+	void DoorUpdate(float _Delta);
+	void InputUpdate();
+
+	void ToggleLamp();
+	void TurnOnImages();
+	void TurnOffImages();
+
+	void SelectAllow();
 };
 

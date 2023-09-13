@@ -4,6 +4,7 @@
 
 SelectLevel::SelectLevel()
 	: timer(0)
+	, DoOnce(false)
 	, IsOpen{false, }
 {
 }
@@ -71,9 +72,19 @@ void SelectLevel::Start()
 
 void SelectLevel::Update(float _Delta)
 {
-	timer += _Delta;
+	if (timer < 10.f) timer += _Delta;
 
 	if (false == IsEveryDoorOpen()) DoorOpen();
+
+	if (false == DoOnce)
+	{
+		if (timer > 3.f)
+		{
+			DoOnce = true;
+			SelectSceneObject->SelectAllow();
+		}
+	}
+
 }
 
 void SelectLevel::LevelStart(GameEngineLevel* _PrevLevel)

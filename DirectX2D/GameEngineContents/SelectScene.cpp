@@ -6,7 +6,10 @@ SelectScene::SelectScene()
 	, MoveTimer(0.f)
 	, ColorTurn(0)
 	, SelectNum(0)
+	, SelectOnce(false)
 	, DoorSpeed{0, }
+	, SelectRestrict(true)
+	, MoveDoor{false, }
 {
 }
 
@@ -73,12 +76,10 @@ void SelectScene::Start()
 		}
 	};
 
-	std::pair<float, float> CharcterFace_Location[4] = {
-		{-430.f, -64.f},
-		{-141.f, -64.f},
-		{143.f, -64.f},
-		{430.f, -64.f},
-	};
+	CharcterFace_Location[0] = { -430.f, -64.f };
+	CharcterFace_Location[1] = { -141.f, -64.f };
+	CharcterFace_Location[2] = { 143.f, -64.f };
+	CharcterFace_Location[3] = { 430.f, -64.f };
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -105,7 +106,7 @@ void SelectScene::Start()
 	}
 
 	DoorCloseEffect = CreateComponent<GameEngineSpriteRenderer>(3);
-	DoorCloseEffect->CreateAnimation("DoorEffect", "DoorCloseEffect", 0.1f, -1, -1, true);
+	DoorCloseEffect->CreateAnimation("DoorEffect", "DoorCloseEffect", 0.1f, -1, -1, false);
 	DoorCloseEffect->ChangeAnimation("DoorEffect");
 	DoorCloseEffect->Transform.SetLocalPosition({ -430.f, -260.f });
 	DoorCloseEffect->SetImageScale({ 330.f, 100.f });
@@ -127,19 +128,42 @@ void SelectScene::Update(float _Delta)
 
 	if (MoveTimer <= 0.3f) MoveTimer += _Delta;
 
-	for (int i = 0; i < 4; i++) SelectCheck[ColorTurn][i]->Off();
+	TurnOffImages();
 
+	ToggleLamp();
+
+	DoorUpdate(_Delta);
+
+	InputUpdate();
+
+	TurnOnImages();
+}
+
+void SelectScene::StartOpenDoor(int _DoorNum)
+{
+	MoveDoor[_DoorNum][static_cast<int>(EMoveType::Open)] = true;
+
+	Door[_DoorNum]->SetSprite("DoorClosed1.png");
+	Door[_DoorNum]->SetImageScale({ 270.f, 430.f });
+
+	DoorSpeed[_DoorNum] = -250.f;
+}
+
+void SelectScene::StartCloseDoor(int _DoorNum)
+{
+	MoveDoor[_DoorNum][static_cast<int>(EMoveType::Close)] = true;
+
+	Door[_DoorNum]->SetSprite("DoorClosed2.png");
+	Door[_DoorNum]->SetImageScale({ 270.f, 430.f });
+
+	DoorSpeed[_DoorNum] = 0.f;
+}
+
+void SelectScene::DoorUpdate(float _Delta)
+{
 	for (int i = 0; i < 4; i++)
 	{
-		for (int j = 0; j < 3; j++)
-		{
-			CharacterFace[i][j]->Off();
-		}
-	}
-
-	for (int i = 0; i < 4; i++)
-	{
-		if (true == MoveDoor[i])
+		if (true == MoveDoor[i][static_cast<int>(EMoveType::Open)])
 		{
 			float Loc = Door[i]->Transform.GetWorldPosition().Y;
 
@@ -154,43 +178,93 @@ void SelectScene::Update(float _Delta)
 			}
 			else
 			{
-				MoveDoor[i] = false;
+				MoveDoor[i][static_cast<int>(EMoveType::Open)] = false;
+			}
+		}
+
+		if (true == MoveDoor[i][static_cast<int>(EMoveType::Close)])
+		{
+			float Loc = Door[i]->Transform.GetWorldPosition().Y;
+
+			if (DoorSpeed[i] < 500.f)
+			{
+				DoorSpeed[i] += 50.f;
+			}
+
+			if (Loc > CharcterFace_Location[i].second)
+			{
+				Door[i]->Transform.AddLocalPosition(float4::DOWN * _Delta * DoorSpeed[i]);
+			}
+			else
+			{
+				float4 DoorCloseEffectPos = DoorCloseEffect->Transform.GetWorldPosition();
+				MoveDoor[i][static_cast<int>(EMoveType::Close)] = false;
+
+				DoorCloseEffectPos.X = CharcterFace_Location[i].first;
+
+				DoorCloseEffect->Transform.SetLocalPosition(DoorCloseEffectPos);
+				DoorCloseEffect->AnimationPauseOff();
 			}
 		}
 	}
+}
 
+void SelectScene::InputUpdate()
+{
+	if (false == SelectRestrict)
+	{
+		if (MoveTimer >= 0.3f)
+		{
+			if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress('A'))
+			{
+				MoveTimer -= 0.3f;
+				SelectNum--;
+
+				if (SelectNum <= -1) SelectNum += 4;
+			}
+
+			if (GameEngineInput::IsPress(VK_RIGHT) || GameEngineInput::IsPress('D'))
+			{
+				MoveTimer -= 0.3f;
+				SelectNum++;
+
+				if (SelectNum >= 4) SelectNum -= 4;
+			}
+		}
+
+ 		if (GameEngineInput::IsPress(VK_SPACE))
+		{
+			SelectOnce = true;
+			SelectRestrict = true;
+
+ 			StartCloseDoor(SelectNum);
+		}
+	}
+
+}
+
+void SelectScene::ToggleLamp()
+{
 	if (ToggleTimer > 0.5f)
 	{
 		ToggleTimer -= 0.5f;
 		ColorTurn = (ColorTurn == 0) ? 1 : 0;
 	}
+}
 
-	if (MoveTimer >= 0.3f)
-	{
-		if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress('A'))
-		{
-			MoveTimer -= 0.3f;
-			SelectNum--;
-
-			if (SelectNum <= -1) SelectNum += 4;
-		}
-
-		if (GameEngineInput::IsPress(VK_RIGHT) || GameEngineInput::IsPress('D'))
-		{
-			MoveTimer -= 0.3f;
-			SelectNum++;
-
-			if (SelectNum >= 4) SelectNum -= 4;
-		}
-	}
-
+void SelectScene::TurnOnImages()
+{
+	int FaceType;
+	
 	SelectCheck[ColorTurn][SelectNum]->On();
 
 	for (int i = 0; i < 4; i++)
 	{
+		FaceType = static_cast<int>((SelectOnce == true) ? EFaceType::SelectCheck : EFaceType::Selected);
+
 		if (SelectNum == i)
 		{
-			CharacterFace[i][static_cast<int>(EFaceType::Selected)]->On();
+			CharacterFace[i][FaceType]->On();
 		}
 		else
 		{
@@ -199,13 +273,21 @@ void SelectScene::Update(float _Delta)
 	}
 }
 
-void SelectScene::StartOpenDoor(int _DoorNum)
+void SelectScene::TurnOffImages()
 {
-	MoveDoor[_DoorNum] = true;
+	for (int i = 0; i < 4; i++) SelectCheck[ColorTurn][i]->Off();
 
-	DoorSpeed[_DoorNum] = -250.f;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			CharacterFace[i][j]->Off();
+		}
+	}
 }
 
-void SelectScene::StartCloseDoor(int _DoorNum)
+void SelectScene::SelectAllow()
 {
+	SelectRestrict = false;
+	SelectOnce = false;
 }

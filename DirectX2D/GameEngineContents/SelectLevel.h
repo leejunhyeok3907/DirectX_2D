@@ -26,6 +26,7 @@ private:
 	std::shared_ptr<class SelectScene> SelectSceneObject;
 
 	float timer;
+	bool DoOnce;
 	bool IsOpen[4];
 
 private:
