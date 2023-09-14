@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PlayMap.h"
 #include "Monster.h"
+#include "TileMap.h"
 
 PlayLevel::PlayLevel() 
 {
@@ -14,6 +15,8 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Start()
 {
+	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({0, 0, 0, 1});
+
 
 	{
 		// 엔진용 쉐이더를 전부다 전부다 로드하는 코드를 친다.
@@ -60,6 +63,7 @@ void PlayLevel::Start()
 
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
+		PlayerObject = Object;
 	}
 
 	{
@@ -76,24 +80,50 @@ void PlayLevel::Start()
 		//std::shared_ptr<PlayMap> Object3 = CreateActor<PlayMap>(ContentsObjectType::Monster);
 	}
 
-	{
-		std::shared_ptr<PlayMap> Object = CreateActor<PlayMap>(ContentsObjectType::BackGround);
-		Map = Object;
-	}
+	//{
+	//	std::shared_ptr<PlayMap> Object = CreateActor<PlayMap>(ContentsObjectType::BackGround);
+	//	Map = Object;
+	//}
 
+	{
+		std::shared_ptr<TileMap> Object = CreateActor<TileMap>(ContentsObjectType::BackGround);
+
+		size_t TileX = 300;
+		size_t TileY = 300;
+
+		Object->TileRenderer->CreateTileMap({ TileX, TileY, {16, 16}, "HoHoYee_AttackABC" });
+
+		for (size_t y = 0; y < TileY; y++)
+		{
+			for (size_t x = 0; x < TileX; x++)
+			{
+				Object->TileRenderer->SetTileIndex({y, x});
+			}
+		}
+
+		TileMapObject = Object;
+	}
 }
 
 void PlayLevel::Update(float _Delta)
 {
-	//static float Time = 0.0f;
-	//Time += _Delta;
+	std::string FPS;
+	FPS = std::to_string(static_cast<int>(1.0f / _Delta));
+	FPS += "\n";
+	OutputDebugStringA(FPS.c_str());
 
-	//if (nullptr != Map && 3.0f <= Time)
-	//{
-	//	Map->Death();
-	//	Map = nullptr;
-	//	// Map = nullptr;
-	//}
+	static size_t X = 0;
+
+	if (GameEngineInput::IsDown('Y'))
+	{
+		TileMapObject->TileRenderer->SetTilePos({ PlayerObject->Transform.GetWorldPosition(), 1 });
+
+		// TileMapObject->TileRenderer->SetTile({ ++X, 0, 1 });
+		int a = 0;
+	}
+
+	// TileMapObject->
+
 }
 
 void PlayLevel::LevelStart(GameEngineLevel* _PrevLevel)

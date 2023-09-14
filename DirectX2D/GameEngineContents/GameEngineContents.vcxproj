@@ -191,6 +191,10 @@
     </ClCompile>
     <ClCompile Include="SelectLevel.cpp" />
     <ClCompile Include="SelectScene.cpp" />
+    <ClCompile Include="TileMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>
@@ -222,6 +226,10 @@
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="SelectLevel.h" />
     <ClInclude Include="SelectScene.h" />
+    <ClInclude Include="TileMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>

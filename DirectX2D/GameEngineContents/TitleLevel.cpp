@@ -12,6 +12,8 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Start()
 {
+	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 0, 0, 0, 1 });
+
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("GameEngineResources");

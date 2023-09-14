@@ -13,5 +13,9 @@
 #include <GameEngineCore/GameEngineSprite.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEngineCore/GameEngineRenderTarget.h>
+
+// Contents
+#include <GameEngineCore/GameEngineTileMap.h>
 
 #include "ContentsEnum.h"

@@ -24,16 +24,16 @@ void Player::Start()
 		TestCollision->Transform.SetLocalScale({ 30, 30, 1 });
 
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
-		MainSpriteRenderer->SetSprite("HoHoYee_AttackABC2");
-		MainSpriteRenderer->SetImageScale({ 100.0f, 100.0f });
+		// MainSpriteRenderer->SetSprite("HoHoYee_AttackABC");
+		MainSpriteRenderer->SetImageScale({ 256.0f, 256.0f });
 		// MainSpriteRenderer->Transform.SetLocalScale({30, 30, 1.0f});
 
-		/*MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC2", 0.05f, -1, -1, true);
+		MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC", 0.1f, -1, -1, true);
 		MainSpriteRenderer->ChangeAnimation("Run");
 		MainSpriteRenderer->SetSamplerState(SamplerOption::LINEAR);
 		MainSpriteRenderer->Transform.SetLocalPosition({ 100.0f, 0.0f, 0.0f });
 
-		MainSpriteRenderer->SetEndEvent("Run", std::bind(&Player::TestEvent, this, std::placeholders::_1));*/
+		MainSpriteRenderer->SetEndEvent("Run", std::bind(&Player::TestEvent, this, std::placeholders::_1));
 
 		// MainSpriteRenderer->Transform.SetLocalScale({5, 5});
 		// MainSpriteRenderer->AutoSpriteSizeOn();
@@ -73,22 +73,21 @@ void Player::Update(float _Delta)
 
 	EventParameter Event;
 
-	Event.Enter = [](GameEngineCollision* Col)
+	Event.Enter = [](GameEngineCollision* _this, GameEngineCollision* Col)
 		{
 			Col->GetActor()->Death();
 			int a = 0;
 		};
 
-	Event.Stay = [](GameEngineCollision* Col)
+	Event.Stay = [](GameEngineCollision* _this, GameEngineCollision* Col)
 		{
 			int a = 0;
 		};
 
 
-	Event.Exit = [](GameEngineCollision* Col)
+	Event.Exit = [=](GameEngineCollision* _this, GameEngineCollision* Col)
 		{
 			// 
-
 			int a = 0;
 		};
 
