@@ -89,11 +89,12 @@ void SelectLevel::Update(float _Delta)
 
 void SelectLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	GameEngineSound::SoundPlay("SelectBgm.mp3");
+	SelectBGM=GameEngineSound::SoundPlay("SelectBgm.mp3");
 }
 
 void SelectLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
+	SelectBGM.Stop();
 }
 
 void SelectLevel::DoorOpen()

@@ -50,10 +50,10 @@ void TitleLevel::Update(float _Delta)
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	//GameEngineSound::SoundPlay("TitleBgm.mp3");
+	TitleBGM = GameEngineSound::SoundPlay("TitleBgm.mp3", 1);
 }
 
 void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	int a = 0;
+	TitleBGM.Stop();
 }

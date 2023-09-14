@@ -7,6 +7,7 @@
 #include "PlayLevel.h"
 #include "SelectLevel.h"
 #include "TitleLevel.h"
+#include "Stage01Level.h"
 
 ContentsCore::ContentsCore() 
 {
@@ -22,7 +23,9 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<SelectLevel>("SelectLevel");
-	GameEngineCore::ChangeLevel("TitleLevel");
+	GameEngineCore::CreateLevel<Stage01Level>("Stage01Level");
+
+	GameEngineCore::ChangeLevel("Stage01Level");
 
 	SoundContentLoad();
 

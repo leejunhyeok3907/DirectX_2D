@@ -191,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="SelectLevel.cpp" />
     <ClCompile Include="SelectScene.cpp" />
+    <ClCompile Include="Stage01BackGround.cpp" />
+    <ClCompile Include="Stage01Level.cpp" />
+    <ClCompile Include="Stage01Map.cpp" />
     <ClCompile Include="TileMap.cpp">
       <SubType>
       </SubType>
@@ -226,6 +229,9 @@
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="SelectLevel.h" />
     <ClInclude Include="SelectScene.h" />
+    <ClInclude Include="Stage01BackGround.h" />
+    <ClInclude Include="Stage01Level.h" />
+    <ClInclude Include="Stage01Map.h" />
     <ClInclude Include="TileMap.h">
       <SubType>
       </SubType>

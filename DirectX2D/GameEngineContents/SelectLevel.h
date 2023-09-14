@@ -32,5 +32,7 @@ private:
 private:
 	void DoorOpen();
 	bool IsEveryDoorOpen();
+
+	GameEngineSoundPlayer SelectBGM;
 };
 

@@ -30,6 +30,15 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Stage01Level.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage01BackGround.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage01Map.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h" />
@@ -62,6 +71,15 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage01Level.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage01BackGround.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage01Map.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
