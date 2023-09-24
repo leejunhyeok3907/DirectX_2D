@@ -40,17 +40,12 @@ public:
 	std::vector<float> Inter;
 };
 
-enum class SamplerOption
-{
-	LINEAR,
-	POINT,
-};
-
 enum class PivotType
 {
 	Center,
 	Bottom,
 	Left,
+	LeftTop,
 };
 
 // Ό³Έν :
@@ -126,8 +121,6 @@ public:
 		AutoScaleRatio.X = -abs(AutoScaleRatio.X);
 	}
 
-	void SetSamplerState(SamplerOption _Option);
-
 	bool IsCurAnimationEnd() 
 	{
 		return CurFrameAnimations->IsEnd;
@@ -158,8 +151,11 @@ public:
 	void SetEndEvent(std::string_view _AnimationName, std::function<void(GameEngineSpriteRenderer*)> _Function);
 	void SetFrameEvent(std::string_view _AnimationName, int _Frame, std::function<void(GameEngineSpriteRenderer*)> _Function);
 
+	void SetPivotValue(const float4& _Value)
+	{
+		Pivot = _Value;
+	}
 	void SetPivotType(PivotType _Type);
-
 	void SetImageScale(const float4& _Scale);
 	void AddImageScale(const float4& _Scale);
 

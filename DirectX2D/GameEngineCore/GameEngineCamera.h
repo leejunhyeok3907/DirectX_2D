@@ -36,6 +36,8 @@ public:
 		ProjectionType = _ProjectionType;
 	}
 
+	float4 GetWorldMousePos2D();
+
 protected:
 	void Start() override;
 
@@ -49,7 +51,7 @@ private:
 	EPROJECTIONTYPE ProjectionType = EPROJECTIONTYPE::Orthographic;
 	float Far = 1000.0f;
 	float Near = 0.1f;
-	float FOV = 30.f;
+	float FOV = 60.0f;
 
 	int CameraOrder = 0;
 	std::map<int, std::list<std::shared_ptr<class GameEngineRenderer>>> Renderers;

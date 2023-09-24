@@ -24,14 +24,14 @@
     <ClCompile Include="SelectLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="SelectScene.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Stage01Level.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="Stage01BackGround.cpp">
       <Filter>Object</Filter>
@@ -39,7 +39,7 @@
     <ClCompile Include="Stage01Map.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerCharacter.cpp">
+    <ClCompile Include="TitleScene.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,14 +70,14 @@
     <ClInclude Include="SelectLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="SelectScene.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="Stage01Level.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCharacter.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Stage01BackGround.h">
       <Filter>Object</Filter>
@@ -85,7 +85,7 @@
     <ClInclude Include="Stage01Map.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerCharacter.h">
+    <ClInclude Include="TitleScene.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>

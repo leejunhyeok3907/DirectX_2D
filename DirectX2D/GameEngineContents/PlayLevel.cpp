@@ -80,50 +80,34 @@ void PlayLevel::Start()
 		//std::shared_ptr<PlayMap> Object3 = CreateActor<PlayMap>(ContentsObjectType::Monster);
 	}
 
-	//{
-	//	std::shared_ptr<PlayMap> Object = CreateActor<PlayMap>(ContentsObjectType::BackGround);
-	//	Map = Object;
-	//}
-
 	{
-		std::shared_ptr<TileMap> Object = CreateActor<TileMap>(ContentsObjectType::BackGround);
-
-		size_t TileX = 300;
-		size_t TileY = 300;
-
-		Object->TileRenderer->CreateTileMap({ TileX, TileY, {16, 16}, "HoHoYee_AttackABC" });
-
-		for (size_t y = 0; y < TileY; y++)
-		{
-			for (size_t x = 0; x < TileX; x++)
-			{
-				Object->TileRenderer->SetTileIndex({y, x});
-			}
-		}
-
-		TileMapObject = Object;
+		std::shared_ptr<PlayMap> Object = CreateActor<PlayMap>(ContentsObjectType::BackGround);
+		Map = Object;
 	}
+
+	//{
+	//	std::shared_ptr<TileMap> Object = CreateActor<TileMap>(ContentsObjectType::BackGround);
+
+	//	size_t TileX = 300;
+	//	size_t TileY = 300;
+
+	//	Object->TileRenderer->CreateTileMap({ TileX, TileY, {32, 32}, "HoHoYee_AttackABC" });
+	//	Object->TileRenderer->SetSamplerState(SAMPLER_OBJECT::LINEAR);
+
+	//	for (size_t y = 0; y < TileY; y++)
+	//	{
+	//		for (size_t x = 0; x < TileX; x++)
+	//		{
+	//			Object->TileRenderer->SetTileIndex({y, x});
+	//		}
+	//	}
+
+	//	TileMapObject = Object;
+	//}
 }
 
 void PlayLevel::Update(float _Delta)
 {
-	std::string FPS;
-	FPS = std::to_string(static_cast<int>(1.0f / _Delta));
-	FPS += "\n";
-	OutputDebugStringA(FPS.c_str());
-
-	static size_t X = 0;
-
-	if (GameEngineInput::IsDown('Y'))
-	{
-		TileMapObject->TileRenderer->SetTilePos({ PlayerObject->Transform.GetWorldPosition(), 1 });
-
-		// TileMapObject->TileRenderer->SetTile({ ++X, 0, 1 });
-		int a = 0;
-	}
-
-	// TileMapObject->
-
 }
 
 void PlayLevel::LevelStart(GameEngineLevel* _PrevLevel)

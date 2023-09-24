@@ -28,7 +28,6 @@ void SelectScene::Start()
 	}
 
 	BackGroundRender = CreateComponent<GameEngineSpriteRenderer>(2);
-	BackGroundRender->SetSamplerState(SamplerOption::POINT);
 	BackGroundRender->SetSprite("SelectBackground.png");
 	BackGroundRender->SetImageScale(WindowScale);
 
@@ -87,7 +86,6 @@ void SelectScene::Start()
 		for (int j = 0; j < 4; j++)
 		{
 			SelectCheck[i][j] = CreateComponent<GameEngineSpriteRenderer>(3);
-			SelectCheck[i][j]->SetSamplerState(SamplerOption::POINT);
 			SelectCheck[i][j]->SetSprite(SelectCheck_Name[i][j].data());
 			SelectCheck[i][j]->Transform.SetLocalPosition({ SelectCheck_Location[j].first, SelectCheck_Location[j].second});
 			SelectCheck[i][j]->SetImageScale({ 270.f, 95.f });
@@ -101,7 +99,6 @@ void SelectScene::Start()
 		{
 			CharacterFace[i][j] = CreateComponent<GameEngineSpriteRenderer>(1);
 			CharacterFace[i][j]->SetSprite(CharacterFace_Name[i][j].data());
-			CharacterFace[i][j]->SetSamplerState(SamplerOption::POINT);
 			CharacterFace[i][j]->Transform.SetLocalPosition({ CharcterFace_Location[i].first, CharcterFace_Location[i].second });
 			CharacterFace[i][j]->SetImageScale({ 270.f, 385.f });
 			CharacterFace[i][j]->Off();
@@ -109,7 +106,6 @@ void SelectScene::Start()
 	}
 
 	DoorCloseEffect = CreateComponent<GameEngineSpriteRenderer>(3);
-	DoorCloseEffect->SetSamplerState(SamplerOption::POINT);
 	DoorCloseEffect->CreateAnimation("DoorEffect", "DoorCloseEffect", 0.1f, -1, -1, false);
 	DoorCloseEffect->ChangeAnimation("DoorEffect");
 	DoorCloseEffect->Transform.SetLocalPosition({ -430.f, -260.f });
@@ -120,7 +116,6 @@ void SelectScene::Start()
 	for (int i = 0; i < 4; i++)
 	{
 		Door[i] = CreateComponent<GameEngineSpriteRenderer>(1);
-		Door[i]->SetSamplerState(SamplerOption::POINT);
 		Door[i]->SetSprite("DoorClosed1.png");
 		Door[i]->Transform.SetLocalPosition({ CharcterFace_Location[i].first, CharcterFace_Location[i].second });
 		Door[i]->SetImageScale({ 270.f, 430.f });

@@ -9,11 +9,11 @@
 #include "TitleLevel.h"
 #include "Stage01Level.h"
 
-ContentsCore::ContentsCore() 
+ContentsCore::ContentsCore()
 {
 }
 
-ContentsCore::~ContentsCore() 
+ContentsCore::~ContentsCore()
 {
 }
 

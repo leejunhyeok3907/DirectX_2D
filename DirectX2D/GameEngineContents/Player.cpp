@@ -19,34 +19,15 @@ Player::~Player()
 void Player::Start()
 {
 	{
-		// 줄줄이 사탕 식으로 만들려고.
-		TestCollision = CreateComponent<GameEngineComponent>(30);
-		TestCollision->Transform.SetLocalScale({ 30, 30, 1 });
-
+		// 부모로 바꿔줘야 
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
-		// MainSpriteRenderer->SetSprite("HoHoYee_AttackABC");
 		MainSpriteRenderer->SetImageScale({ 256.0f, 256.0f });
-		// MainSpriteRenderer->Transform.SetLocalScale({30, 30, 1.0f});
-
 		MainSpriteRenderer->CreateAnimation("Run", "HoHoYee_AttackABC", 0.1f, -1, -1, true);
 		MainSpriteRenderer->ChangeAnimation("Run");
-		MainSpriteRenderer->SetSamplerState(SamplerOption::LINEAR);
-		MainSpriteRenderer->Transform.SetLocalPosition({ 100.0f, 0.0f, 0.0f });
+		MainSpriteRenderer->Transform.SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+		MainSpriteRenderer->AutoSpriteSizeOn();
 
 		MainSpriteRenderer->SetEndEvent("Run", std::bind(&Player::TestEvent, this, std::placeholders::_1));
-
-		// MainSpriteRenderer->Transform.SetLocalScale({5, 5});
-		// MainSpriteRenderer->AutoSpriteSizeOn();
-		// MainSpriteRenderer->SetAutoScaleRatio(2.0f);
-		// MainSpriteRenderer->Transform.SetLocalScale({-100.0f, 100.0f, 1.0f});
-	}
-
-	{
-		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
-		MainSpriteRenderer->SetSprite("HoHoYee_AttackABC2");
-		MainSpriteRenderer->Transform.SetLocalPosition({ 0, 70, 1.0f });
-		MainSpriteRenderer->SetImageScale({ 100.0f, 20.0f });
-		MainSpriteRenderer->SetPivotType(PivotType::Left);
 	}
 
 	{
@@ -61,76 +42,11 @@ void Player::Start()
 
 void Player::TestEvent(GameEngineRenderer* _Renderer)
 {
-	int a = 0;
 }
 
 void Player::Update(float _Delta)
 {
-	MainSpriteRenderer->AddImageScale(float4{-10.0f, 0.0f, 0.0f} *_Delta);
-
-	// 몬스터가 몬스터랑 충돌하고 싶으면?
-	// 내 미래의 위치
-
-	EventParameter Event;
-
-	Event.Enter = [](GameEngineCollision* _this, GameEngineCollision* Col)
-		{
-			Col->GetActor()->Death();
-			int a = 0;
-		};
-
-	Event.Stay = [](GameEngineCollision* _this, GameEngineCollision* Col)
-		{
-			int a = 0;
-		};
-
-
-	Event.Exit = [=](GameEngineCollision* _this, GameEngineCollision* Col)
-		{
-			// 
-			int a = 0;
-		};
-
-	Col->CollisionEvent(ContentsCollisionType::Monster, Event);
-
-	//Col->Collision(ContentsCollisionType::Monster, {100.0f, 0.0f, 0.0f}, [](std::vector<std::shared_ptr<GameEngineCollision>>& _Collision)
-	//	{
-	//		for (size_t i = 0; i < _Collision.size(); i++)
-	//		{
-	//			_Collision[i]->GetActor()->Death();
-	//		}
-	//	});
-
-	//if (xxxx 상황이 되면)
-	//{
-	//	MainSpriteRenderer->Death();
-	//	MainSpriteRenderer = nullptr;
-	//}
-
-	// 충돌했냐 안했냐만 보면
-
-	//std::list<std::shared_ptr<Monster>> MonsterList = 
-	//	GetLevel()->GetObjectGroupConvert<Monster>(ContentsObjectType::Monster);
-
-	//for (std::shared_ptr<Monster> MonsterPtr : MonsterList)
-	//{
-	//	// 랜더러로 하는 이유 => 액터로도 할수있는데
-	//	// 보통 액터는 위치와 기준을 잡아주는 용도로 사용됩니다.
-	//	// MainSpriteRenderer->Transform.Collision(MonsterPtr->Renderer->Transform);
-
-	//	GameEngineTransform& Left = TestCollision->Transform;
-	//	GameEngineTransform& Right = MonsterPtr->Renderer->Transform;
-	//	Right.AddLocalRotation({ 0.0f, 0.0f, 360.0f * _Delta });
-
-	//	// 콜리전 파라미터를 사용한 이유가. 
-	//	if (GameEngineTransform::Collision({ Left , Right, ColType::OBBBOX2D }))
-	//	{
-	//		MonsterPtr->Death();
-	//		int a = 0;
-	//		// 충돌했다.
-	//	}
-	//}
-
+	// GameEngineDebug::DrawBox2D(MainSpriteRenderer->Transform);
 
 	float Speed = 100.0f;
 
@@ -139,14 +55,15 @@ void Player::Update(float _Delta)
 		MainSpriteRenderer->AnimationPauseSwitch();
 	}
 
-
 	if (GameEngineInput::IsPress('A'))
 	{
+		Transform.SetLocalScale({-1,1.0f, 1.0f});
 		Transform.AddLocalPosition(float4::LEFT * _Delta * Speed);
 	}
 
 	if (GameEngineInput::IsPress('D'))
 	{
+		Transform.SetLocalScale({ 1,1.0f, 1.0f });
 		Transform.AddLocalPosition(float4::RIGHT * _Delta * Speed);
 	}
 
@@ -169,6 +86,13 @@ void Player::Update(float _Delta)
 	{
 		Transform.AddLocalRotation({ 0.0f, 0.0f, -360.0f * _Delta });
 	}
+
+	GetLevel()->GetMainCamera()->Transform.SetLocalPosition(Transform.GetWorldPosition());
+	// 
+	float4 WorldMousePos = GetLevel()->GetMainCamera()->GetWorldMousePos2D();
+	OutputDebugStringA(WorldMousePos.ToString("\n").c_str());
+
+	// OutputDebugStringA(GameEngineCore::MainWindow.GetMousePos().ToString("\n").c_str());
 
 	//GameEngineColor Color = PlayMap::MainMap->GetColor(Transform.GetWorldPosition(), GameEngineColor::RED);
 

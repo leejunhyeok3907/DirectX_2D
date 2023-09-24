@@ -2,11 +2,11 @@
 #include "TitleLevel.h"
 #include "TitleScene.h"
 
-TitleLevel::TitleLevel() 
+TitleLevel::TitleLevel()
 {
 }
 
-TitleLevel::~TitleLevel() 
+TitleLevel::~TitleLevel()
 {
 }
 

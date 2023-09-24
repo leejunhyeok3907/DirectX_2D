@@ -52,6 +52,15 @@
     <Filter Include="Rendering\Contents">
       <UniqueIdentifier>{a6d0688b-ca25-4242-bfb7-f6ebe2358b15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Mesh">
+      <UniqueIdentifier>{8200ffa5-c554-4bcb-91fb-ce76ddfc5914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Material">
+      <UniqueIdentifier>{e71f5898-ca16-4d09-8991-e2ed984d620f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{659a6965-3a7a-4131-9d51-3cb386670c03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineActor.h">
@@ -148,6 +157,18 @@
     <ClInclude Include="GameEngineTileMap.h">
       <Filter>Rendering\Contents</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineShaderResHelper.h">
+      <Filter>Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMesh.h">
+      <Filter>Resources\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMaterial.h">
+      <Filter>Resources\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDebugCore.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -243,6 +264,18 @@
     </ClCompile>
     <ClCompile Include="GameEngineTileMap.cpp">
       <Filter>Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineShaderResHelper.cpp">
+      <Filter>Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMesh.cpp">
+      <Filter>Resources\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMaterial.cpp">
+      <Filter>Resources\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDebugCore.cpp">
+      <Filter>Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
