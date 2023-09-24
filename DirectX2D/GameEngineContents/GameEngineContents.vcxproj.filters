@@ -39,6 +39,9 @@
     <ClCompile Include="Stage01Map.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PreCompile.h" />
@@ -80,6 +83,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Stage01Map.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCharacter.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>

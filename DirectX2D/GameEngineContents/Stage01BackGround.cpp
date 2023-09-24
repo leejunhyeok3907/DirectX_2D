@@ -16,7 +16,7 @@ void Stage01BackGround::Start()
 	BackGroundRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 	BackGroundRenderer->SetSprite("Stage01Background.png");
 	BackGroundRenderer->SetPivotType(PivotType::Left);
-	BackGroundRenderer->SetImageScale({ 12405, 1440 });
+	BackGroundRenderer->SetImageScale({ 16000, 1400 });
 }
 
 void Stage01BackGround::Update(float _Delta)

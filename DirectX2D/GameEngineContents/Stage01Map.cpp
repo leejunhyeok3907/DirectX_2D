@@ -16,7 +16,7 @@ void Stage01Map::Start()
 	StageMapRenderer = CreateComponent<GameEngineSpriteRenderer>(1);
 	StageMapRenderer->SetSprite("Stage01Map.png");
 	StageMapRenderer->SetPivotType(PivotType::Left);
-	StageMapRenderer->SetImageScale({ 8812, 640 });
+	StageMapRenderer->SetImageScale({ 12515, 920 });
 }
 
 void Stage01Map::Update(float _Delta)
