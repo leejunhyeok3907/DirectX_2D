@@ -3,6 +3,7 @@
 #include "GameEngineLevel.h"
 #include "GameEngineRenderer.h"
 #include "GameEngineCore.h"
+#include "GameEngineRenderTarget.h"
 
 GameEngineCamera::GameEngineCamera() 
 {
@@ -15,6 +16,8 @@ GameEngineCamera::~GameEngineCamera()
 void GameEngineCamera::Start()
 {
 	GameEngineActor::Start();
+
+	ZoomValue = 1.0f;
 
 	GameEngineLevel* Level = GetLevel();
 
@@ -39,12 +42,14 @@ void GameEngineCamera::Update(float _Delta)
 
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
 
+	WindowScale *= ZoomValue;
+
 	switch (ProjectionType)
 	{
-	case Perspective:
+	case EPROJECTIONTYPE::Perspective:
 		Transform.PerspectiveFovLHDeg(FOV, WindowScale.X, WindowScale.Y, Near, Far);
 		break;
-	case Orthographic:
+	case EPROJECTIONTYPE::Orthographic:
 		Transform.OrthographicLH(WindowScale.X, WindowScale.Y, Near, Far);
 		break;
 	default:
@@ -77,6 +82,8 @@ void GameEngineCamera::Render(float _DeltaTime)
 	{
 		return;
 	}
+
+	GameEngineCore::GetBackBufferRenderTarget()->Setting();
 
 	//x + 1;
 	//y + 1;

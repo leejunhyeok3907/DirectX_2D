@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineBase/GameEngineMath.h>
 #include <list>
+#include "EngineEnum.h"
 
 // 기하구조를 표현하고
 // 부모자식관계를 처리한다.
@@ -120,6 +121,7 @@ public:
 		PositionMatrix.Position(Position);
 
 		LocalWorldMatrix = ScaleMatrix * RotationMatrix * PositionMatrix * RevolutionMatrix;
+		WorldMatrix = LocalWorldMatrix;
 	}
 
 	void WorldViewProjectionCalculation()

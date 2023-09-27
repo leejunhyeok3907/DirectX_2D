@@ -163,6 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EngineEnum.h" />
     <ClInclude Include="GameEngineActor.h">
       <SubType>
       </SubType>
@@ -208,6 +209,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineGeometryShader.h" />
     <ClInclude Include="GameEngineIndexBuffer.h" />
     <ClInclude Include="GameEngineInputLayOut.h">
       <SubType>
@@ -239,6 +241,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineRenderTarget.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderUnit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -275,6 +281,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineTransform.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineUIRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -340,6 +350,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineGeometryShader.cpp" />
     <ClCompile Include="GameEngineIndexBuffer.cpp" />
     <ClCompile Include="GameEngineInputLayOut.cpp">
       <SubType>
@@ -371,6 +382,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineRenderTarget.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderUnit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -407,6 +422,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineTransform.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineUIRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>

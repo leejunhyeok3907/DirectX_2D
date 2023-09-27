@@ -12,19 +12,20 @@ PlayerCharacter::~PlayerCharacter()
 void PlayerCharacter::Start()
 {
 	UpperSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(30);
-	UpperSpriteRenderer->CreateAnimation("Idle_Upper", "IdleUpper", 0.1f, -1, -1, true);
-	UpperSpriteRenderer->CreateAnimation("Walk_Upper", "WalkUpper", 0.1f, -1, -1, true);
-	UpperSpriteRenderer->ChangeAnimation("Walk_Upper");
-	//UpperSpriteRenderer->SetImageScale({ 87.f, 87.f });
-	//UpperSpriteRenderer->SetImageScale({ 96.f, 84.f });
+	UnderSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(29);
+
+	CreateAnimations();
+
+	UpperSpriteRenderer->ChangeAnimation("Walk");
+	UpperSpriteRenderer->AutoSpriteSizeOn();
+	UpperSpriteRenderer->SetAutoScaleRatio(3.f);
+	UpperSpriteRenderer->SetPivotType(PivotType::Center);
 	UpperSpriteRenderer->Transform.SetLocalPosition({ 0.0f, 45.0f, 0.0f });
 
-	UnderSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(29);
-	UnderSpriteRenderer->CreateAnimation("Idle_Under", "IdleUnder", 0.1f, -1, -1, true);
-	UnderSpriteRenderer->CreateAnimation("Walk_Under", "WalkUnder", 0.1f, -1, -1, true);
-	UnderSpriteRenderer->ChangeAnimation("Walk_Under");
-	//UnderSpriteRenderer->SetImageScale({ 63.f, 48.f });
-	//UnderSpriteRenderer->SetImageScale({ 63.f, 60.f });
+	UnderSpriteRenderer->ChangeAnimation("Walk");
+	UnderSpriteRenderer->AutoSpriteSizeOn();
+	UnderSpriteRenderer->SetAutoScaleRatio(3.f);
+	UnderSpriteRenderer->SetPivotType(PivotType::Center);
 	UnderSpriteRenderer->Transform.SetLocalPosition({ -15.0f, 0.0f, 0.0f });
 }
 
@@ -50,5 +51,21 @@ void PlayerCharacter::Update(float _Delta)
 	if (GameEngineInput::IsPress('S'))
 	{
 		Transform.AddLocalPosition(float4::DOWN * _Delta * Speed);
+	}
+}
+
+void PlayerCharacter::CreateAnimations()
+{
+	{
+		UpperSpriteRenderer->CreateAnimation("Idle", "IdleUpper", 0.1f, -1, -1, true);
+		UpperSpriteRenderer->CreateAnimation("Walk", "WalkUpper", 0.1f, -1, -1, true);
+		UpperSpriteRenderer->CreateAnimation("Fire", "FireUpper", 0.1f, -1, -1, true);
+		UpperSpriteRenderer->CreateAnimation("JumpIdle", "JumpIdleUpper", 0.1f, -1, -1, true);
+	}
+
+	{
+		UnderSpriteRenderer->CreateAnimation("Idle", "IdleUnder", 0.1f, -1, -1, true);
+		UnderSpriteRenderer->CreateAnimation("Walk", "WalkUnder", 0.1f, -1, -1, true);
+		UnderSpriteRenderer->CreateAnimation("JumpIdle", "JumpIdleUnder", 0.1f, -1, -1, true);
 	}
 }

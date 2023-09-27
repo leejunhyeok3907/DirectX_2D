@@ -4,6 +4,7 @@
 #include "PlayMap.h"
 #include "Monster.h"
 #include "TileMap.h"
+#include "MainUIActor.h"
 
 PlayLevel::PlayLevel() 
 {
@@ -67,6 +68,10 @@ void PlayLevel::Start()
 	}
 
 	{
+		std::shared_ptr<MainUIActor> Object = CreateActor<MainUIActor>(ContentsObjectType::UI);
+	}
+
+	{
 		//GameEngineRandom NewRanadom;
 		//for (size_t i = 0; i < 10; i++)
 		//{
@@ -85,25 +90,24 @@ void PlayLevel::Start()
 		Map = Object;
 	}
 
-	//{
-	//	std::shared_ptr<TileMap> Object = CreateActor<TileMap>(ContentsObjectType::BackGround);
+	{
+		std::shared_ptr<TileMap> Object = CreateActor<TileMap>(ContentsObjectType::BackGround);
 
-	//	size_t TileX = 300;
-	//	size_t TileY = 300;
+		size_t TileX = 300;
+		size_t TileY = 300;
 
-	//	Object->TileRenderer->CreateTileMap({ TileX, TileY, {32, 32}, "HoHoYee_AttackABC" });
-	//	Object->TileRenderer->SetSamplerState(SAMPLER_OBJECT::LINEAR);
+		Object->TileRenderer->CreateTileMap({ TileX, TileY, {32, 32}, "HoHoYee_AttackABC" });
 
-	//	for (size_t y = 0; y < TileY; y++)
-	//	{
-	//		for (size_t x = 0; x < TileX; x++)
-	//		{
-	//			Object->TileRenderer->SetTileIndex({y, x});
-	//		}
-	//	}
+		for (size_t y = 0; y < TileY; y++)
+		{
+			for (size_t x = 0; x < TileX; x++)
+			{
+				Object->TileRenderer->SetTileIndex({y, x});
+			}
+		}
 
-	//	TileMapObject = Object;
-	//}
+		TileMapObject = Object;
+	}
 }
 
 void PlayLevel::Update(float _Delta)

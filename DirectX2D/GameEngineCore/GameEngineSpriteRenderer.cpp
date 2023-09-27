@@ -89,9 +89,13 @@ void GameEngineSpriteRenderer::Start()
 	SetMaterial("2DTexture");
 
 	const TransformData& Data = ImageTransform.GetConstTransformDataRef();
-	ShaderResHelper.ConstantBufferLink("TransformData", Data);
-	ShaderResHelper.ConstantBufferLink("SpriteData", CurSprite.SpritePivot);
-	ShaderResHelper.SetTexture("DiffuseTex", "NSet.Png");
+	GetShaderResHelper().SetConstantBufferLink("TransformData", Data);
+	GetShaderResHelper().SetConstantBufferLink("SpriteData", CurSprite.SpritePivot);
+	// ShaderResHelper.SetTexture("DiffuseTex", "NSet.Png");
+	GetShaderResHelper().SetConstantBufferLink("SpriteRendererInfo", SpriteRendererInfoValue);
+
+	SetSprite("NSet.Png");
+
 
 	//std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(float4), "SpriteData");
 	//if (nullptr != Buffer)
@@ -148,9 +152,7 @@ void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 	ImageTransform.TransformUpdate();
 	ImageTransform.CalculationViewAndProjection(Transform.GetConstTransformDataRef());
 
-
-
-	ShaderResHelper.SetTexture("DiffuseTex", CurSprite.Texture);
+	GetShaderResHelper().SetTexture("DiffuseTex", CurSprite.Texture);
 
 
 	GameEngineRenderer::Render(_Camera, _Delta);
@@ -344,6 +346,9 @@ void GameEngineSpriteRenderer::SetPivotType(PivotType _Type)
 	{
 	case PivotType::Center:
 		Pivot = {0.5f, 0.5f};
+		break;
+	case PivotType::Top:
+		Pivot = { 0.5f, 0.0f };
 		break;
 	case PivotType::Bottom:
 		Pivot = { 0.5f, 1.0f };
