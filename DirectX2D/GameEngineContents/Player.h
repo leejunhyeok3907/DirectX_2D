@@ -1,5 +1,13 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/GameEngineState.h>
+
+enum class PlayerState
+{
+	Idle,
+	Smoke,
+	Move,
+};
 
 // 설명 :
 class Player : public GameEngineActor
@@ -21,11 +29,18 @@ protected:
 	void Start() override;
 	void Update(float _Delta) override;
 
+	// 원래대로 
+	// void Smoke_Stay()
+
 private:
 	std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
+
 	std::shared_ptr<class GameEngineComponent> TestCollision;
 	float4 GrivityForce = {0.0f, 0.0f, 0.0f, 1.0f};
 
 	std::shared_ptr<GameEngineCollision> Col;
+
+	GameEngineState PlayerState;
+	float MoveSpeed = 100.0f;
 };
 

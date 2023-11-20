@@ -85,10 +85,31 @@ public:
 
 	}
 
+	float4(DirectX::XMFLOAT3 _Float3)
+		: Float3(_Float3)
+	{
+
+	}
+
 	float4(float _X = 0.0f, float _Y = 0.0f, float _Z = 0.0f, float _W = 1.0f)
 		: X(_X), Y(_Y), Z(_Z), W(_W)
 	{
 
+	}
+
+	UINT ColorToUint() const
+	{
+		UINT Return;
+
+		char* Ptr = reinterpret_cast<char*>(&Return);
+
+		// 0~1
+		Ptr[0] = static_cast<int>(R * 255.0f);
+		Ptr[1] = static_cast<int>(G * 255.0f);
+		Ptr[2] = static_cast<int>(B * 255.0f);
+		Ptr[3] = static_cast<int>(A * 255.0f);
+
+		return Return;
 	}
 
 	inline int iX() const
@@ -248,6 +269,16 @@ public:
 		return ReturnValue;
 	}
 
+
+	float4 operator%(const float4 _Value) const
+	{
+		float4 ReturnValue = DirectX::XMVectorMod(DirectXVector, _Value.DirectXVector);
+		ReturnValue.W = W;
+
+		return ReturnValue;
+	}
+
+
 	float4& operator/=(const float4 _Value)
 	{
 		float PrevW = W;
@@ -355,7 +386,7 @@ public:
 
 	std::string ToString(std::string_view _Next = "")
 	{
-		return "X : " + std::to_string(X) + " Y : " + std::to_string(Y) + " Z : " + std::to_string(Z) + _Next.data();
+		return "X : " + std::to_string(X) + " Y : " + std::to_string(Y) + " Z : " + std::to_string(Z) + _Next.data() + "\n";
 	}
 
 
@@ -481,7 +512,44 @@ public:
 		return Result;
 	}
 
+	inline float4 RoundUpReturn() const
+	{
+		float4 Result = *this;
+		Result.X = round(Result.X);
+		Result.Y = round(Result.Y);
+		Result.Z = round(Result.Z);
+		return Result;
+	}
 
+	inline float4 RoundDownReturn() const
+	{
+		float4 Result = *this;
+		Result.X = floor(Result.X);
+		Result.Y = floor(Result.Y);
+		Result.Z = floor(Result.Z);
+		return Result;
+	}
+
+	inline void Ceil()
+	{
+		X = ceil(X);
+		Y = ceil(Y);
+		Z = ceil(Z);
+	}
+
+	inline void Round()
+	{
+		X = round(X);
+		Y = round(Y);
+		Z = round(Z);
+	}
+
+	inline void Floor()
+	{
+		X = floor(X);
+		Y = floor(Y);
+		Z = floor(Z);
+	}
 
 	float4 operator*(const class float4x4& _Other) const;
 	float4& operator*=(const class float4x4& _Other);
@@ -669,7 +737,9 @@ public:
 		//Pos.Position(_Pos);
 		//*this = Scale * Rot * Pos;
 
-		DirectXMatrix = DirectX::XMMatrixAffineTransformation(_Scale.DirectXVector, _RotQuaternion.DirectXVector, _RotQuaternion.DirectXVector, _Pos.DirectXVector);
+		float4 Rot = _RotQuaternion;
+		Rot.QuaternionToEulerDeg();
+		DirectXMatrix = DirectX::XMMatrixAffineTransformation(_Scale.DirectXVector, Rot.DirectXVector, _RotQuaternion.DirectXVector, _Pos.DirectXVector);
 	}
 
 	void Decompose(float4& _Scale, float4& _RotQuaternion, float4& _Pos) const

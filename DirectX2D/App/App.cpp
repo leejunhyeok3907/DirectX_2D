@@ -12,11 +12,14 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineContents/ContentsCore.h>
 
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
+	// std::string Text = GameEngineString::Format("{}, {:.2f}", "aaaa", 2.222222f);
+
 	GameEngineCore::EngineStart<ContentsCore>(hInstance);
 }
 

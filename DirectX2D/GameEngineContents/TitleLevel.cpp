@@ -1,59 +1,36 @@
 #include "PreCompile.h"
 #include "TitleLevel.h"
-#include "TitleScene.h"
 
-TitleLevel::TitleLevel()
+TitleLevel::TitleLevel() 
 {
 }
 
-TitleLevel::~TitleLevel()
+TitleLevel::~TitleLevel() 
 {
 }
 
 void TitleLevel::Start()
 {
-	GameEngineCore::GetBackBufferRenderTarget()->SetClearColor({ 0, 0, 0, 1 });
-
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToExistsChild("GameEngineResources");
-		Dir.MoveChild("ContentsResources");
-		Dir.MoveChild("Texture");
-		Dir.MoveChild("TitleTexture");
-		std::vector<GameEngineFile> Files = Dir.GetAllFile();
-
-		for (size_t i = 0; i < Files.size(); i++)
-		{
-			GameEngineFile& File = Files[i];
-			GameEngineTexture::Load(File.GetStringPath());
-		}
-
-		GameEngineSprite::CreateSingle("MainTitle.png");
-		GameEngineSprite::CreateSingle("InsertCoin.png");
-	}
-
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -500.0f });
-	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
-
-	std::shared_ptr<TitleScene> Object = CreateActor<TitleScene>(ContentsObjectType::BackGround);
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 }
 
 
 void TitleLevel::Update(float _Delta)
 {
-	if (GameEngineInput::IsPress(VK_SPACE))
+	if (GameEngineInput::IsPress('P', this))
 	{
-		GameEngineCore::ChangeLevel("SelectLevel");
+		GameEngineCore::ChangeLevel("PlayLevel");
 	}
 }
 
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	TitleBGM = GameEngineSound::SoundPlay("TitleBgm.mp3", 1);
+	int a = 0;
 }
 
 void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	TitleBGM.Stop();
+	int a = 0;
 }

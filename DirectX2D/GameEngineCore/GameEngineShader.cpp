@@ -68,8 +68,17 @@ bool GameEngineShader::AutoCompile(GameEngineFile& _File)
 
 	// 이 파일의 경로로 
 	_File.Open(FileOpenType::Read, FileDataType::Text);
+	uintmax_t size = _File.GetFileSize();
 
-	std::string_view ShaderCode = _File.GetStringView();
+	if (0 == size)
+	{
+		return false;
+	}
+
+	GameEngineSerializer Ser;
+	_File.DataAllRead(Ser);
+
+	std::string_view ShaderCode = Ser.GetStringView();
 
 	// 파일을 다 읽어왔고
 	// 내부에 어떤 쉐이더가 있는지 분석하기 시작할 것이다.

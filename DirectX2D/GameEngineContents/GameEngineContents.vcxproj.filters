@@ -24,26 +24,23 @@
     <ClCompile Include="MainUIActor.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="SelectLevel.cpp">
+    <ClCompile Include="ReverseActor.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsSpriteRenderer.cpp">
+      <Filter>Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsControlWindow.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Stage01Level.cpp">
-      <Filter>Level</Filter>
+    <ClCompile Include="PlayerEffect.cpp">
+      <Filter>Render\PostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerCharacter.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectScene.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage01BackGround.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage01Map.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Object</Filter>
+    <ClCompile Include="OldFilm.cpp">
+      <Filter>Render\PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,26 +70,23 @@
     <ClInclude Include="MainUIActor.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="SelectLevel.h">
+    <ClInclude Include="ReverseActor.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsSpriteRenderer.h">
+      <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsControlWindow.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Stage01Level.h">
-      <Filter>Level</Filter>
+    <ClInclude Include="PlayerEffect.h">
+      <Filter>Render\PostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerCharacter.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectScene.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage01BackGround.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage01Map.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Object</Filter>
+    <ClInclude Include="OldFilm.h">
+      <Filter>Render\PostEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -105,5 +99,22 @@
     <Filter Include="Global">
       <UniqueIdentifier>{ca09bba4-fac2-48d7-bd82-8680ddecfb32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{68de699d-90d0-4d47-b373-7d816636e702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{eacac3dc-b6db-445c-8e5f-d0c8a349f3d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{152ff9a9-9b28-4ff1-8a7f-ea288dfbcdc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render\PostEffect">
+      <UniqueIdentifier>{2b45010a-62fd-41e1-873b-18364b64e513}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\ContentsResources\Shader\ContentsTextureShader.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

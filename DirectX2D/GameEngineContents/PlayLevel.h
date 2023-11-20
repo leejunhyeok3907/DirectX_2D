@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineCore/GameEngineGUI.h>
 
 // Ό³Έν :
 class PlayLevel : public GameEngineLevel
@@ -23,7 +24,9 @@ protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
+
 private:
+	std::shared_ptr<class FadePostEffect> FadeEffect;
 	std::shared_ptr<class Player> PlayerObject;
 	std::shared_ptr<class PlayMap> Map;
 	std::shared_ptr<class TileMap> TileMapObject;
